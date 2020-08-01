@@ -51,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       width: menuWidth,
       duration: Duration(milliseconds: duration),
       curve: Curves.easeInOut,
-      color: Colors.grey[200],
+      color: Color.fromRGBO(217, 228, 255, 1.0),
       transform: Matrix4.translationValues(
         _menuOpened ? size.width - menuWidth : size.width,
         0,
@@ -70,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     return AnimatedContainer(
       curve: Curves.easeInOut,
       duration: Duration(milliseconds: duration),
-      color: Colors.transparent,
+      color: Color.fromRGBO(238, 243, 255, 1.0),
       transform: Matrix4.translationValues(
         _menuOpened ? -menuWidth : 0,
         0,
@@ -115,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
           transform: Matrix4.translationValues(_myImgGridMargin, 0, 0),
           duration: Duration(milliseconds: duration),
           curve: Curves.easeInOut,
-          child: _imageGrid,
+          child: Image.asset('assets/profile_text.png'),
         )
 
       ],
@@ -127,12 +127,27 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     shrinkWrap: true,
     crossAxisCount: 3,
     childAspectRatio: 1,
-    children: List.generate(30, (index) => _gridImgItem(index)),
+    children: _buildGridTiles(9),
   );
 
-  CachedNetworkImage _gridImgItem(int index) => CachedNetworkImage(
-    fit: BoxFit.cover,
-    imageUrl: "https://picsum.photos/id/$index/100/100");
+//  CachedNetworkImage _gridImgItem(int index) => CachedNetworkImage(
+//    fit: BoxFit.cover,
+//    imageUrl: "https://picsum.photos/id/$index/100/100");
+  List<Widget> _buildGridTiles(numberOfTiles) {
+    List<Container> containers = new List<Container>.generate(numberOfTiles,
+            (int index) {
+          //index = 0, 1, 2,...
+          final imageName = index < 9 ?
+          'assets/ceo${index + 1}.png' : 'assets/ceo${index + 1}.png';
+          return new Container(
+            child: new Image.asset(
+                imageName,
+                fit: BoxFit.fill
+            ),
+          );
+        });
+    return containers;
+  }
 
 
   Padding _editProfileBtn() {
@@ -159,7 +174,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     return Padding(
       padding: const EdgeInsets.only(left: common_gap),
       child: Text(
-        'Bio from User. So say somethimg.',
+        'Fashionistar of the year!',
         style: TextStyle(fontWeight: FontWeight.w400),
       ),
     );
@@ -169,7 +184,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     return Padding(
       padding: const EdgeInsets.only(left: common_gap),
       child: Text(
-        'User Real Name',
+        'Chae Won Song',
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
@@ -181,7 +196,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
             padding: const EdgeInsets.all(common_gap),
             child: CircleAvatar(
               radius: 40,
-              backgroundImage: NetworkImage(getProfileImgPath("thecodingpapa")),
+              backgroundImage: AssetImage('assets/ceo1.png'),
             ),
           ),
           Expanded(
@@ -193,9 +208,9 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                   _getStatusValueWidget('4536'),
                 ]),
                 TableRow(children: [
+                  _getStatusLabelWidget('Point'),
                   _getStatusLabelWidget('Posts'),
-                  _getStatusLabelWidget('Followers'),
-                  _getStatusLabelWidget('Following'),
+                  _getStatusLabelWidget('Likes'),
                 ]),
               ],
             ),
@@ -236,7 +251,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
             child: Padding(
           padding: const EdgeInsets.only(left: common_gap),
           child: Text(
-            'thecodingpapa',
+            'ChaeONE',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
         )),

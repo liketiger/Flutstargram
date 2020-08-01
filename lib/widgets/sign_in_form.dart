@@ -23,6 +23,7 @@ class _SignInFormState extends State<SignInForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(238, 243, 255, 1.0),
       resizeToAvoidBottomInset: true,
       body: Padding(
         padding: const EdgeInsets.all(common_gap),
@@ -34,9 +35,9 @@ class _SignInFormState extends State<SignInForm> {
 //            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               SizedBox(
-                height: 80,
+                height: 50,
               ),
-              Image.asset('assets/insta_text_logo.png'),
+              Image.asset('assets/clup_logo.png'),
               SizedBox(
                 height: 10,
               ),
